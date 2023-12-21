@@ -3,6 +3,7 @@
  */
 package com.spicejet.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -24,16 +25,10 @@ public class SignUpPage extends BaseClass{
 	@FindBy (xpath = "(//label[text()='Last Name']/following::input)[1]")
 	WebElement lastName;
 	
-	@FindBy(xpath = "(//label[text()='Date of Birth']/following::input)[1]")
+	@FindBy(xpath = "//input[@id='dobDate']")
 	WebElement dob;
 	
-	@FindBy(xpath = "//select[@class='react-datepicker__year-select']")
-	WebElement year;
-	
-	@FindBy(xpath = "//select[@class='react-datepicker__month-select']")
-	WebElement month;
-	
-	@FindBy(xpath = "//div[@class='react-datepicker__day react-datepicker__day--003']")
+	@FindBy(xpath = "//div[text()='2']")
 	WebElement day;
 	
 	@FindBy(xpath = "(//label[text()='Mobile Number']/following::input)[1]")
@@ -57,24 +52,40 @@ public class SignUpPage extends BaseClass{
 	public SignUpPage() {
 		PageFactory.initElements(driver, this);
 	}
-	
-	public void signInFunction() throws Exception {
+
+	public String signInFunction(String fName, String lName, String mobileNumber, String email, String password, String confirmPassword, String xpath, String expMessage, String testCase) throws Exception {
+		waitExplicit(titleDropDown);
 		Select sel = new Select(titleDropDown);
 		sel.selectByVisibleText("Mr");
-		type(firstName, readProperty("firstName"));
-		type(lastName, readProperty("lastName"));
-		clickOn(dob);
-		clickOn(year);
-		sel.selectByVisibleText("2000");
-		clickOn(month);
-		sel.selectByVisibleText("February");
-		clickOn(day);
-		type(mobileNumber, readProperty("MobileNumber"));
-		type(typeEmail, readProperty("email"));
-		type(typePassword, readProperty("password"));
-		type(typeConfirmPassword, readProperty("password"));
+		type(firstName, fName);
+		type(lastName, lName);
+		type(dob, readProperty("dob"));
+		jsClickOn(day);
+		Thread.sleep(2000);
+		jsScrollUntillElement(this.mobileNumber);
+		type(this.mobileNumber, mobileNumber);
+		Thread.sleep(2000);
+		jsScrollUntillElement(typeEmail);
+		type(typeEmail, email);
+		Thread.sleep(2000);
+		jsScrollUntillElement(typeEmail);
+		type(typeEmail, email);
+		Thread.sleep(2000);
+		jsScrollUntillElement(typePassword);
+		type(typePassword, password);
+		Thread.sleep(2000);
+		jsScrollUntillElement(typePassword);
+		type(typePassword, password);
+		Thread.sleep(2000);
+		jsScrollUntillElement(typeConfirmPassword);
+		type(typeConfirmPassword, confirmPassword);
+		Thread.sleep(2000);
+		jsScrollUntillElement(clickCheckBox);
 		clickOn(clickCheckBox);
+		jsScrollUntillElement(submitButton);
 		clickOn(submitButton);
+		WebElement msg = driver.findElement(By.xpath(""+xpath+""));
+		return extractText(msg);
 	}
 	
 }

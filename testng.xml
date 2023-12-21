@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="com.spicejet.testCases.TC01_NavigationToSpiceJetApp"/>
+      <class name="com.spicejet.testCases.TC02_ValidateNavigationButtons"/>
+      <class name="com.spicejet.testCases.TC03_ValidateSignUpPage"/>
+      <class name="com.spicejet.testCases.TC04_LogInFunction"/>
+      <class name="com.spicejet.testCases.TC05_BookOneWayTicket"/>
+      <class name="com.spicejet.testCases.TC06_RoundTripTicketBooking"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

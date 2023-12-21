@@ -36,12 +36,12 @@ public class BaseClass extends Utils{
 	
 	@AfterMethod
 	public void close() {
-		driver.quit();
+		 driver.quit();
 	}
 	
 	@DataProvider
-	public Object[][] getFromExcel() throws Exception{
-		Object[][] data = dataReader(sheetName);
+	public String[][] getFromExcel() throws Exception{
+		String[][] data = dataReader(sheetName);
 		return data;
 	}
 	
